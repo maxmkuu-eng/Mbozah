@@ -9,7 +9,7 @@ permissions:
 
 jobs:
   copy:
-    if: !startsWith(github.event.head_commit.message, 'Copy New to Mbozah')
+    if: ${{ !startsWith(github.event.head_commit.message, 'Copy New to Mbozah') }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Mbozah
