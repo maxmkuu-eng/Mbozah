@@ -73,7 +73,7 @@ if (!fs.existsSync(DATA_DIR)) fs.mkdirSync(DATA_DIR, { recursive: true });
 if (!fs.existsSync(FILES_DIR)) fs.mkdirSync(FILES_DIR, { recursive: true });
 
 const DEFAULT_OWNER: UserProfile = {
-  id: 'user_max_owner', email: 'maxmkuu@gmail.com', name: 'Max', title: 'Mkuu & Mmiliki wa Mfumo', role: 'owner',
+  id: 'user_max_owner', email: 'maxmkuu@gmail.com', name: 'Mbozah', title: 'Boss na Mmiliki wa Mfumo', role: 'owner',
   language: 'Kiswahili', theme: 'dark', securityPinSet: false, createdAt: new Date().toISOString(),
 };
 const DEFAULT_AUTO_REPLY_SETTINGS: AutoReplySettings = {
