@@ -1,0 +1,6 @@
+{
+  "name": "MKUU AI",
+  "description": "Msaidizi binafsi wa AI wa Max mwenye Gemini Live Stream, Max Memory, Max Identify, Watu Wangu wa Karibu, Max Auto Reply na uundaji wa mafaili halisi.",
+  "requestFramePermissions": ["microphone", "camera"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

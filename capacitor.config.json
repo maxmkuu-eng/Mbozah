@@ -1,0 +1,26 @@
+{
+  "appId": "com.mkuu.ai",
+  "appName": "Mkuu AI",
+  "webDir": "dist",
+  "server": {
+    "androidScheme": "https",
+    "cleartext": true,
+    "allowNavigation": [
+      "*.run.app",
+      "*.onrender.com",
+      "*.vercel.app",
+      "*.railway.app",
+      "*.up.railway.app",
+      "*.fly.dev",
+      "*.googleapis.com",
+      "*.google.com",
+      "*.cloudfunctions.net",
+      "*"
+    ]
+  },
+  "android": {
+    "allowMixedContent": true,
+    "captureInput": true,
+    "webContentsDebuggingEnabled": true
+  }
+}

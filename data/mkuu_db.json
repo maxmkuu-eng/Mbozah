@@ -1,0 +1,299 @@
+{
+  "users": [
+    {
+      "id": "user_max_owner",
+      "email": "maxmkuu@gmail.com",
+      "name": "Max",
+      "title": "Mkuu & Mmiliki wa Mfumo",
+      "role": "owner",
+      "language": "Kiswahili",
+      "theme": "dark",
+      "securityPinSet": false,
+      "createdAt": "2026-08-19T07:16:39.526Z"
+    }
+  ],
+  "memories": [
+    {
+      "id": "mem_1",
+      "userId": "user_max_owner",
+      "content": "Max anapendelea lugha ya Kiswahili fasaha kwa mawasiliano yote na MKUU AI.",
+      "category": "Preferences",
+      "importance": "high",
+      "tags": [
+        "lugha",
+        "kiswahili",
+        "upendeleo"
+      ],
+      "createdAt": "2026-08-17T07:16:39.526Z",
+      "updatedAt": "2026-08-17T07:16:39.526Z",
+      "source": "explicit_command"
+    },
+    {
+      "id": "mem_2",
+      "userId": "user_max_owner",
+      "content": "Max ni mmiliki na msimamizi mkuu wa mifumo yote ya MKUU AI.",
+      "category": "General",
+      "importance": "high",
+      "tags": [
+        "mmiliki",
+        "max",
+        "utambulisho"
+      ],
+      "createdAt": "2026-08-16T07:16:39.526Z",
+      "updatedAt": "2026-08-16T07:16:39.526Z",
+      "source": "manual"
+    },
+    {
+      "id": "mem_3",
+      "userId": "user_max_owner",
+      "content": "Miradi mikuu ya Max kwa mwaka huu inahusu ujenzi wa teknolojia za kijasusi za AI na mifumo ya kiotomatiki.",
+      "category": "Work",
+      "importance": "medium",
+      "tags": [
+        "kazi",
+        "miradi",
+        "teknolojia"
+      ],
+      "createdAt": "2026-08-18T07:16:39.526Z",
+      "updatedAt": "2026-08-18T07:16:39.526Z",
+      "source": "auto_extracted"
+    }
+  ],
+  "people": [],
+  "conversations": [
+    {
+      "id": "conv_1789035264002",
+      "userId": "user_max_owner",
+      "title": "Mkuu vipi",
+      "createdAt": "2026-09-11T01:52:42.481Z",
+      "updatedAt": "2026-09-14T08:22:02.459Z",
+      "messages": [
+        {
+          "id": "msg_1789091562481_u",
+          "role": "user",
+          "content": "Mkuu vipi",
+          "timestamp": "2026-09-11T01:52:42.481Z",
+          "isVoice": false,
+          "attachments": []
+        },
+        {
+          "id": "msg_1789091562481_a",
+          "role": "assistant",
+          "content": "Salama kabisa, Bwana Max. Karibu sana.\n\nNiko tayari kukuhudumia. Je, kuna jambo lolote unahitaji nikutimizie au kuna ripoti yoyote unayotaka tuichambue kuhusiana na miradi yako ya teknolojia ya AI na mifumo ya kiotomatiki? \n\nNipo hapa kwa ajili yako.",
+          "timestamp": "2026-09-11T01:52:42.481Z",
+          "generatedFiles": [],
+          "memoryExtracted": [],
+          "personRecognized": [],
+          "aiProvider": "Google Gemini",
+          "chatModel": "gemini-3.1-flash-lite"
+        },
+        {
+          "id": "msg_1789092697302_u",
+          "role": "user",
+          "content": "Vipi vita ya Irani na marekani imesitiswa?",
+          "timestamp": "2026-09-11T02:11:37.302Z",
+          "isVoice": false,
+          "attachments": []
+        },
+        {
+          "id": "msg_1789092697303_a",
+          "role": "assistant",
+          "content": "Bwana Max, kuhusu ombi lako la kwanza la kutengeneza picha ya katuni (cartoon), kwa sasa mfumo wangu hauna uwezo wa moja kwa moja wa kuhariri au kubadilisha picha ulizozipakia kuwa katuni. Hata hivyo, ninaweza kukupa maelekezo ya jinsi unavyoweza kutumia programu maalum za AI kufanya hivyo kwa urahisi.\n\nKuhusu swali lako la pili kuhusu hali ya mivutano kati ya Iran na Marekani:\n\nKama unavyojua, mimi ni **MKUU AI** na nimejikita zaidi katika kukusaidia kwenye miradi yako ya teknolojia na usimamizi wa kazi zako. Kwa mujibu wa maagizo ya mfumo wangu, sihusiki na kufanya *live web search* (utafutaji wa habari za moja kwa moja mtandaoni).\n\nHata hivyo, kama unahitaji uchambuzi wa kimkakati au tathmini ya jinsi mivutano ya kijiopolitika inavyoweza kuathiri sekta ya teknolojia au usalama wa mifumo ya AI (ambayo ndiyo miradi yako mikuu), nipo tayari kukusaidia kwa hilo kwa kutumia maarifa niliyohifadhi.\n\nJe, ungependa tuendelee na uchambuzi wa mradi wako wa AI kwa sasa, au kuna jambo lingine unahitaji nikusaidie?",
+          "timestamp": "2026-09-11T02:11:37.303Z",
+          "generatedFiles": [],
+          "memoryExtracted": [],
+          "personRecognized": [],
+          "aiProvider": "Google Gemini",
+          "chatModel": "gemini-3.1-flash-lite"
+        },
+        {
+          "id": "msg_1789294678767_u",
+          "role": "user",
+          "content": "Simba anacheza saa ngapi leo ",
+          "timestamp": "2026-09-13T10:17:58.767Z",
+          "isVoice": false,
+          "attachments": []
+        },
+        {
+          "id": "msg_1789294678767_a",
+          "role": "assistant",
+          "content": "⚽ **Simba SC anacheza na fixtures.**\n🕐 **Muda haujathibitishwa kwa UTC na chanzo; sitaweka muda wa kubahatisha.**\n🏆 **CAF Champions League**\n\n**Chanzo:** [fotmob.com](https://www.fotmob.com/teams/165086/overview/simba-sc)",
+          "timestamp": "2026-09-13T10:17:58.767Z",
+          "generatedFiles": [],
+          "memoryExtracted": [],
+          "personRecognized": [],
+          "aiProvider": "AXA Live Web Search",
+          "chatModel": "AXA Live Web Search"
+        },
+        {
+          "id": "msg_1789374122459_u",
+          "role": "user",
+          "content": "Vita kati ya Iran na marekani imesitiswa au Bado inaendelea",
+          "timestamp": "2026-09-14T08:22:02.459Z",
+          "isVoice": false,
+          "attachments": []
+        },
+        {
+          "id": "msg_1789374122459_a",
+          "role": "assistant",
+          "content": "🌍 **AXA LIVE — HABARI/VITA/MIGOGORO**\n*Taarifa ya moja kwa moja — Jumatatu, 14 Septemba 2026, saa 11:22:02, Africa/Dar_es_Salaam (UTC+3)*\n\n📌 **Diplomacy stumbles with postponement of meeting on Strait of Hormuz proposal | Reuters** (reuters.com)\nSummary: - The planned Iran–Gulf states meeting over Strait of Hormuz governance was postponed “in the interests of consensus,” according to Oman’s foreign minister, signaling a diplomatic snag. - Iran indicated it would not reopen Hormuz negotiations until its demands are met by the United States; Iran_COORDINATED with Oman to reschedule. - Saudi Arabia temporarily shut its key oil pipeline, raising concerns about supply; UKMTO also reported a vessel strike in the Strait, with casualties aboard an Iranian vessel. - US-Energy context: oil prices spiked above $100 as markets reopened; U.S. diesel prices hit record levels, and Saudi storage in Yanbu could sustain exports about five to seven da...\n\n📌 **Tehran and Muscat delay talks, citing regional consensus need | News | Al Jazeera** (aljazeera.com)\nSummary: - Iran and Oman (via Muscat) paused talks with Gulf Arab states in September 2026 at the request of regional partners, aiming to build regional consensus. The delay followed an attack on an Iranian cargo vessel in the Strait of Hormuz. - Oman’s Foreign Minister said the postponement was to pursue broader regional consensus. Oman positions itself as a mediator in the Iran-Gulf dispute over Hormuz navigation. - In July 2026, Oman proposed a 50-50 regional mechanism for Strait of Hormuz control and voluntary fees from ships; Iran rejected voluntary fees and urged compulsory payments and a route farther from Iran’s coast. - The talks have yet to yield a breakthrough. The Hormuz traffic ...\n\n📌 **Iran war won't end until after US midterm elections, says Trump** (bbc.com)\nSummary: - The BBC reports that U.S. President Donald Trump said the Iran war “won’t end” until after the November midterm elections, suggesting oil prices will also fall only after the election. - He claimed Iran is desperate to influence the elections and predicted a rapid end to hostilities “immediately after” the vote, though offered no evidence. - The conflict began after US-Israeli strikes in February, with Iran retaliating across the region and oil prices rising above $100 per barrel at times. - Trump’s remarks came amid domestic pressure within the Republican Party to end the war, which has affected public opinion and approval ratings. - The article notes ongoing fighting, regional t...\n\n📌 **Iran, US trade blows as Hormuz impasse deepens** (france24.com)\nSummary: - Iran and the United States are in an escalating, ongoing confrontation in 2026, centered on sea lanes and oil tankers in the Middle East. - Iran’s Revolutionary Guards claim to have attacked multiple US vessels and US bases in retaliation for US strikes on Iranian oil tankers; Washington says it will retaliate against Iranian attacks on US ships. - The Strait of Hormuz remains a critical flashpoint, with Iran claiming control and threatening to target oil tankers near Kuwait and Bahrain. - The US has attacked Iranian tankers and bases in response, increasing tensions and causing oil prices to rise near $100 per barrel. - The conflict involves threats, retaliatory strikes, and limi...\n\n**Vyanzo:**\n1. [reuters.com](https://www.reuters.com/business/energy/diplomacy-stumbles-with-postponement-meeting-strait-hormuz-proposal-2026-09-13/)\n2. [aljazeera.com](https://www.aljazeera.com/news/2026/9/13/tehran-and-muscat-delay-talks-citing-regional-consensus-need)\n3. [bbc.com](https://www.bbc.com/news/articles/c5ydld0gykpo)\n4. [france24.com](https://www.france24.com/en/live-news/20260909-iran-attacks-us-base-in-jordan-as-hormuz-impasse-deepens)",
+          "timestamp": "2026-09-14T08:22:02.459Z",
+          "generatedFiles": [],
+          "memoryExtracted": [],
+          "personRecognized": [],
+          "aiProvider": "AXA Live Web Search",
+          "chatModel": "AXA Live Web Search"
+        }
+      ]
+    },
+    {
+      "id": "conv_1788808584668",
+      "userId": "user_max_owner",
+      "title": "Mume wa raisi wa Tanzania amezikwa ",
+      "createdAt": "2026-09-09T07:58:53.350Z",
+      "updatedAt": "2026-09-09T08:08:21.459Z",
+      "messages": [
+        {
+          "id": "msg_1788940733350_u",
+          "role": "user",
+          "content": "Mume wa raisi wa Tanzania amezikwa nini",
+          "timestamp": "2026-09-09T07:58:53.350Z",
+          "isVoice": false,
+          "attachments": []
+        },
+        {
+          "id": "msg_1788940733350_a",
+          "role": "assistant",
+          "content": "🌐 **AXA LIVE WEB SEARCH**\n*Taarifa ya Moja kwa Moja Mtandaoni (Jumatano, 9 Septemba 2026, saa 10:58:53, Africa/Dar_es_Salaam (UTC+3))*\n\n📌 **Eda ni nini? Je, Rais Samia kuendelea kuongoza akiwa eda? - BBC News Swahili** (🌐 bbc.com):\nMswala uliotajwa kuhusiana na “mume wa raisi wa Tanzania amezikwa nini” haujapatikana moja kwa moja katika yaliyomo. Makadirio ya habari yanazungumzia eda (iddah) ya mjane wa rais, Hafidh Ameir Hassan, na mambo yanayohusu iwapo Rais Samia Suluhu Hassan anaweza kuendelea na majukumu yake katika kipindi cha eda cha miezi minne na siku 10. Habari inafafanua:\n\n- Eda ni kipindi cha kihafidhina cha mjane baada ya kufiwa au kuvunjika ndoa, ambacho, katika Uislamu, hakikatai kufanya kazi au kuitumikia nafasi yake kiratiba, ingawa kuna masharti ya kujiepusha na mambo ya uchumba au ndoa ndani ya kipindi hicho.\n- Kwa mjane wa kiongozi wa taifa ambaye ni Mwislamu, dini inapendekeza kuheshimu eda, lakini haitaki katika kubatilisha utekelezaji wa majukumu ya urais; Rais anaweza kuendelea na majukumu yake na ataepuka shughuli zinazohusisha mazungumzo ya uchumba.\n- Dini inaruhusu kushughulikia kazi na shughuli za kitaifa akiwa katika eda, ingawa anaweza kupunguza safari za kimataifa au za naume, na lazima afuate taratibu za kimaadili zinazofanana na eda.\n\nKwa kifupi: Habari haina habari ya moja kwa moja kuhusu “mume wa rais amezikwa nini,” bali inahusu eda ya mume wa Rais (hafidh Ameir Hassan) na jinsi inavyoathiri uongozi wa Rais Samia Suluhu Hassan.\n\n📌 **Huu Hapa Wasifu wa Mume wa Rais Samia, Aacha Wajane Wawili | UDAKU SPECIAL** (🌐 udakuspecially.com):\nHafidh Ameir Hassan, mume wa Rais wa Tanzania, Samia Suluhu Hassan, alizikwa Jumatatu, Septemba 7, 2026, katika kijiji cha Kizimkazi, Mkoa wa Kusini Unguja. Maziko yalikuwa na taarifa kwamba alimzika akiwa na wajane wawili, watoto wanne, na wajukuu 15. Marehemu alizaliwa tarehe 1 Januari 1946 katika Kisakasaka, Magharibi B, Mjini Magharibi Unguja. Maziko yalielezwa na Naibu Mkurugenzi wa Kurugenzi ya Mawasiliano Ikulu, Shabaan Kisu.\n\n📌 **Tanzania yaomboleza kifo cha mume wa Rais Samia, Hafidh ...** (🌐 taifaleo.nation.co.ke):\nSummary:\nHafidh Ameir Hassan, mume wa Rais wa Tanzania Samia Suluhu Hassan, alikufa Septemba 7, 2026, katika hospitali ya Zanzibar alipokuwa akipokea matibabu ya ugonjwa wa moyo. Makamu wa Rais Deogratius Ndejembi alitoa taarifa ya kifo na kusema mazishi yalianza kuandaliwa katika eneo la Kizimkazi, Zanzibar. Hafidh ameoa na Rais Samia tangu 1978 na walijaliwa watoto.\n\n📌 **Hatimaye Hayati Dkt. John Pombe Magufuli Amezikwa Kijijini Kwao Chato, Geita - Tuko.co.ke** (🌐 kiswahili.tuko.co.ke):\nSummary: The article reports that former Tanzanian President John Pombe Magufuli, referred to as the late president, was buried in his home village of Chato, Geita. The funeral took place on Friday, March 26, 2021, with his body brought to Rumbambagwe Stadium for a Catholic service led by Bishop Gervas Nyaisonga. The ceremony included national anthems, East African songs, and 21 rifle salutes. Attendees included President Samia Suluhu Hassan and former presidents Ali Hassan Mwinyi and Jakaya Kikwete. Magufuli’s burial followed a funeral mass at his home village.\n\n**Vyanzo Vilivyothibitishwa (AXA):**\n- [Eda ni nini? Je, Rais Samia kuendelea kuongoza akiwa eda? - BBC News Swahili](https://www.bbc.com/swahili/articles/cvgy42g0rryo) — *🌐 bbc.com*\n\n- [Huu Hapa Wasifu wa Mume wa Rais Samia, Aacha Wajane Wawili | UDAKU SPECIAL](https://udakuspecially.com/huu-hapa-wasifu-wa-mume-wa-rais-samia-aacha-wajane-wawili/) — *🌐 udakuspecially.com*\n\n- [Tanzania yaomboleza kifo cha mume wa Rais Samia, Hafidh ...](https://taifaleo.nation.co.ke/habari/kimataifa/tanzania-yaomboleza-kifo-cha-mume-wa-rais-samia-hafidh-ameir-hassan/) — *🌐 taifaleo.nation.co.ke*\n\n- [Hatimaye Hayati Dkt. John Pombe Magufuli Amezikwa Kijijini Kwao Chato, Geita - Tuko.co.ke](https://kiswahili.tuko.co.ke/407019-hatimaye-hayati-dkt-john-pombe-magufuli-amezikwa-kijijini-kwao-chato-geita.html) — *🌐 kiswahili.tuko.co.ke*\n\n- [Kifo cha Magufuli: Hayati John Magufuli azikwa Chato - BBC News Swahili](https://www.bbc.com/swahili/56539435) — *🌐 bbc.com*\n\n- [Kifo cha Rais John Pombe Magufuli: Samia Suluhu Hassan aapishwa kuwa Rais wa Tanzania - BBC News Swahili](https://www.bbc.com/swahili/habari-56454055) — *🌐 bbc.com*",
+          "timestamp": "2026-09-09T07:58:53.350Z",
+          "generatedFiles": [],
+          "memoryExtracted": [],
+          "personRecognized": [],
+          "aiProvider": "AXA Live Web Search",
+          "chatModel": "AXA Live Web Search"
+        },
+        {
+          "id": "msg_1788941301459_u",
+          "role": "user",
+          "content": "Mume wa raisi wa Tanzania amezikwa lini na wapi amezikiwa",
+          "timestamp": "2026-09-09T08:08:21.459Z",
+          "isVoice": false,
+          "attachments": []
+        },
+        {
+          "id": "msg_1788941301459_a",
+          "role": "assistant",
+          "content": "🌐 **AXA LIVE WEB SEARCH**\n*Taarifa ya Moja kwa Moja Mtandaoni (Jumatano, 9 Septemba 2026, saa 11:08:21, Africa/Dar_es_Salaam (UTC+3))*\n\n📌 **Eda ni nini? Je, Rais Samia kuendelea kuongoza akiwa eda? - BBC News Swahili** (🌐 bbc.com):\nMume wa Rais wa Tanzania, Hafidh Ameir Hassan, alifariki siku ya 5 Juni 2024 huko Dar es Salaam, Tanzania. Mwili wake ulizikwa katika maziko ya wadhifa wa familia yao nchini, ambapo hafla ya muingiliano ilifanyika na kuzikwa kwa mujibu wa taratibu za Kiafrika na kislamu. Habari inasisitiza maswali kuhusu eda (iddah) ya Rais Samia Suluhu Hassan baada ya kifo cha mumewe na jinsi hilo litavyoathiri utendaji wake wa urais; wataalamu wa Kiislamu wanaeleza kuwa eda haina kumzuia rais kuendelea na majukumu yake ya kiutawala, ingawa anaweza kupunguza shughuli zilizokuwa na uwepo wa wanaume wengine.\n\n📌 **Huu Hapa Wasifu wa Mume wa Rais Samia, Aacha Wajane Wawili | UDAKU SPECIAL** (🌐 udakuspecially.com):\nSummary: Mume wa Rais wa Tanzania, Hafidh Ameir Hassan, alizikwa Jumatatu, Septemba 7, 2026, katika kijiji cha Kizimkazi, Mkoa wa Kusini Unguja (Kisiwa cha Unguja).\n\n📌 **Tanzania yaomboleza kifo cha mume wa Rais Samia, Hafidh ...** (🌐 taifaleo.nation.co.ke):\nSummary:\n- Hafidh Ameir Hassan, mume wa Rais wa Tanzania Samia Suluhu Hassan, alifariki Septemba 7, 2026.\n- Alizikwa katika eneo la Kizimkazi, Zanzibar, tayari kwa mazishi yalikuwa yakiwa yako tayari kuendelea.\n\n📌 **Miaka minne ya Magufuli kaburini, Chato kumkumbuka leo | Mwananchi** (🌐 mwananchi.co.tz):\nKwa mujibu wa yaliyotolewa katika chanzo hiki (Mwananchi), habari inazungumzia miaka minne tangu kifo cha Rais John Magufuli kilichotokea Machi 2021. Taarifa kuu:\n- Magufuli alifariki Machi 17, 2021 katika Hospitali ya Mzena, Dar es Salaam (akiwa katika awamu ya pili ya utawala wake). \n- Mwili wake ulizikwa Machi 26, 2021 katika makaburi ya familia nyumbani kwao Chato, Geita.\n\nKwa hiyo, mume wa rais wa Tanzania (Magufuli) amezikwa Machi 26, 2021, katika makaburi ya familia huko Chato, Geita.\n\n**Vyanzo Vilivyothibitishwa (AXA):**\n- [Eda ni nini? Je, Rais Samia kuendelea kuongoza akiwa eda? - BBC News Swahili](https://www.bbc.com/swahili/articles/cvgy42g0rryo) — *🌐 bbc.com*\n\n- [Huu Hapa Wasifu wa Mume wa Rais Samia, Aacha Wajane Wawili | UDAKU SPECIAL](https://udakuspecially.com/huu-hapa-wasifu-wa-mume-wa-rais-samia-aacha-wajane-wawili/) — *🌐 udakuspecially.com*\n\n- [Tanzania yaomboleza kifo cha mume wa Rais Samia, Hafidh ...](https://taifaleo.nation.co.ke/habari/kimataifa/tanzania-yaomboleza-kifo-cha-mume-wa-rais-samia-hafidh-ameir-hassan/) — *🌐 taifaleo.nation.co.ke*\n\n- [Miaka minne ya Magufuli kaburini, Chato kumkumbuka leo | Mwananchi](https://www.mwananchi.co.tz/mw/habari/kitaifa/miaka-minne-ya-magufuli-kaburini-chato-kumkumbuka-leo-4967836) — *🌐 mwananchi.co.tz*\n\n- [Hatimaye Hayati Dkt. John Pombe Magufuli Amezikwa Kijijini Kwao Chato, Geita - Tuko.co.ke](https://kiswahili.tuko.co.ke/407019-hatimaye-hayati-dkt-john-pombe-magufuli-amezikwa-kijijini-kwao-chato-geita.html) — *🌐 kiswahili.tuko.co.ke*\n\n- [Kifo cha Rais John Pombe Magufuli: Samia Suluhu Hassan aapishwa kuwa Rais wa Tanzania - BBC News Swahili](https://www.bbc.com/swahili/habari-56454055) — *🌐 bbc.com*",
+          "timestamp": "2026-09-09T08:08:21.459Z",
+          "generatedFiles": [],
+          "memoryExtracted": [],
+          "personRecognized": [],
+          "aiProvider": "AXA Live Web Search",
+          "chatModel": "AXA Live Web Search"
+        }
+      ]
+    },
+    {
+      "id": "test_1",
+      "userId": "user_max_owner",
+      "title": "Hello",
+      "createdAt": "2026-08-19T07:32:35.407Z",
+      "updatedAt": "2026-08-19T07:32:35.408Z",
+      "messages": [
+        {
+          "id": "msg_1787124755407_u",
+          "role": "user",
+          "content": "Hello",
+          "timestamp": "2026-08-19T07:32:35.407Z",
+          "isVoice": false,
+          "attachments": []
+        },
+        {
+          "id": "msg_1787124755407_a",
+          "role": "assistant",
+          "content": "Habari za wakati huu, Mkuu wangu Max! Nipo hapa kwa ajili yako. Nikusaidie nini leo?",
+          "timestamp": "2026-08-19T07:32:35.407Z",
+          "generatedFiles": [],
+          "memoryExtracted": [],
+          "personRecognized": []
+        }
+      ]
+    },
+    {
+      "id": "conv_1786809793668",
+      "userId": "user_max_owner",
+      "title": "Mimi ni nani ",
+      "createdAt": "2026-08-19T07:31:09.636Z",
+      "updatedAt": "2026-08-19T07:31:09.636Z",
+      "messages": [
+        {
+          "id": "msg_1787124669636_u",
+          "role": "user",
+          "content": "Mimi ni nani ",
+          "timestamp": "2026-08-19T07:31:09.636Z",
+          "isVoice": false,
+          "attachments": []
+        },
+        {
+          "id": "msg_1787124669636_a",
+          "role": "assistant",
+          "content": "Habari Max mkuu wangu! \n\nWewe ni **Max** (Max), mmiliki na msimamizi mkuu aliyeidhinishwa wa mifumo yote ya **MKUU AI**. Barua pepe yako ni `maxmkuu@gmail.com`.\n\nWewe ni mbunifu na msanidi wa mifumo hii ya kiteknolojia ya kijasusi ya AI na otomatiki kwa mwaka huu. \n\nKama mkuu wangu, nipo hapa kukusaidia kwa kila unalohitaji kwa uaminifu na ufanisi wa hali ya juu. Je, kuna jambo lingine ungetenda au ungependa nikusaidie nalo leo, Mkuu?",
+          "timestamp": "2026-08-19T07:31:09.636Z",
+          "generatedFiles": [],
+          "memoryExtracted": [],
+          "personRecognized": []
+        }
+      ]
+    }
+  ],
+  "files": [],
+  "autoReplySettings": {
+    "user_max_owner": {
+      "userId": "user_max_owner",
+      "enabled": true,
+      "emergencyStop": false,
+      "mode": "automatic",
+      "language": "Kiswahili",
+      "tone": "Heshima & Ueledi",
+      "workingHours": {
+        "enabled": false,
+        "start": "08:00",
+        "end": "18:00"
+      },
+      "myPhoneNumber": "",
+      "phoneVerified": false,
+      "smsEnabled": true,
+      "gmailEnabled": true,
+      "safetyRules": [
+        "Heshimu kila mtu kulingana na uhusiano wao na Max",
+        "Usitoe taarifa za siri za kibenki au nywila",
+        "Kama ni ujumbe wa dharura kutoka kwa Watu wa Karibu, mjulishe Max mara moja",
+        "Jibu kwa Kiswahili fasaha au lugha iliyotumika na mtumaji"
+      ],
+      "whitelistedNumbers": [],
+      "blacklistedNumbers": [],
+      "selectedSimSlot": "both",
+      "simCards": [],
+      "permissions": {
+        "smsReadSend": true,
+        "notificationAccess": true,
+        "exactAlarmReminder": true
+      }
+    }
+  },
+  "autoReplyLogs": [
+    {
+      "userId": "user_max_owner",
+      "channel": "sms",
+      "sender": "+255712345678",
+      "recipient": "Max (SIM)",
+      "incomingMessage": "Habari Max, nilikuwa naulizia kuhusu lile gari bado lipo?",
+      "generatedReply": "Habari! Nimepokea ujumbe wako kuhusu gari. Nimemjulisha Max moja kwa moja ili akupigie au akujibu mara moja kuhusu suala hilo.",
+      "status": "sent",
+      "matchedRelationship": "Haijulikani",
+      "confidence": 0.98,
+      "id": "autoreply_1789374289863_36tjt",
+      "timestamp": "2026-09-14T08:24:49.863Z"
+    }
+  ]
+}

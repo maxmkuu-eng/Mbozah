@@ -1,0 +1,116 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --mkuu-bg: #0b0c0e;
+    --mkuu-surface: #14151a;
+    --mkuu-surface-hover: #1c1d24;
+    --mkuu-border: #282a33;
+    --mkuu-gold: #D4AF37;
+    --mkuu-gold-glow: rgba(212, 175, 55, 0.25);
+    --mkuu-text: #f0f4f9;
+    --mkuu-text-muted: #8e95a2;
+  }
+  html {
+    background-color: #0b0c0e;
+    color: #f0f4f9;
+    font-size: 16px;
+  }
+  body {
+    background-color: #0b0c0e;
+    color: #f0f4f9;
+    font-family: 'Google Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  button, input, textarea, select {
+    font: inherit;
+  }
+}
+
+/* MKUU Gold & Gradient Styles */
+.mkuu-gold-gradient {
+  background: linear-gradient(135deg, #F5D77F 0%, #D4AF37 50%, #AA7C11 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.gemini-gradient-text {
+  background: linear-gradient(90deg, #4E88FF 0%, #9B72CF 50%, #D96570 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.gemini-gradient-bg {
+  background: linear-gradient(135deg, #4E88FF 0%, #9B72CF 50%, #D96570 100%);
+}
+
+.gemini-gradient-border {
+  border-image: linear-gradient(135deg, #4E88FF 0%, #9B72CF 50%, #D96570 100%) 1;
+}
+
+.glass {
+  background: rgba(20, 21, 26, 0.82);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
+}
+
+.3d-card {
+  background: #14151a;
+  border: 1px solid #282a33;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.3d-card:hover {
+  border-color: rgba(212, 175, 55, 0.45);
+  box-shadow: 0 8px 30px rgba(212, 175, 55, 0.12);
+}
+
+.active-nav {
+  background-color: rgba(212, 175, 55, 0.18) !important;
+  color: #D4AF37 !important;
+  border-radius: 9999px;
+  border: 1px solid rgba(212, 175, 55, 0.4) !important;
+}
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+/* Gemini Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #dadce0;
+  border-radius: 8px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #bdc1c6;
+}
+
+@keyframes soundwave {
+  0%, 100% { height: 8px; }
+  50% { height: 32px; }
+}
+.animate-soundwave { animation: soundwave 1.2s ease-in-out infinite; }
+.animate-soundwave-delay-1 { animation: soundwave 1.2s ease-in-out 0.2s infinite; }
+.animate-soundwave-delay-2 { animation: soundwave 1.2s ease-in-out 0.4s infinite; }
+.animate-soundwave-delay-3 { animation: soundwave 1.2s ease-in-out 0.6s infinite; }
+.animate-soundwave-delay-4 { animation: soundwave 1.2s ease-in-out 0.8s infinite; }
+
+

@@ -1,0 +1,35 @@
+import fs from 'fs';
+import path from 'path';
+
+export type TaskStatus = 'pending' | 'in_progress' | 'done' | 'cancelled';
+export type Priority = 'low' | 'medium' | 'high' | 'urgent';
+export type ReminderRepeat = 'none' | 'daily' | 'weekly' | 'monthly';
+
+export interface ManagerTask { id:string; userId:string; title:string; notes?:string; dueAt?:string; priority:Priority; status:TaskStatus; createdAt:string; updatedAt:string; }
+export interface ManagerEvent { id:string; userId:string; title:string; notes?:string; startsAt:string; endsAt?:string; location?:string; createdAt:string; updatedAt:string; }
+export interface ManagerReminder { id:string; userId:string; title:string; remindAt:string; repeat:ReminderRepeat; enabled:boolean; deliveredAt?:string; createdAt:string; }
+export interface ManagerSettings { userId:string; language:'Kiswahili'|'English'|'Auto'; notifications:boolean; quietHours:{enabled:boolean;start:string;end:string}; proactiveAssistant:boolean; defaultTaskPriority:Priority; voiceActions:boolean; androidActions:boolean; }
+export interface ManagerAction { id:string; userId:string; type:'call'|'sms'|'calendar'|'reminder'|'task'; label:string; payload:Record<string,any>; createdAt:string; }
+
+interface Store { tasks:ManagerTask[]; events:ManagerEvent[]; reminders:ManagerReminder[]; settings:Record<string,ManagerSettings>; actions:ManagerAction[]; }
+const DATA_DIR = process.env.MKUU_DATA_DIR ? path.resolve(process.env.MKUU_DATA_DIR) : path.join(process.cwd(),'data');
+const FILE = path.join(DATA_DIR,'assistant_manager.json');
+if(!fs.existsSync(DATA_DIR)) fs.mkdirSync(DATA_DIR,{recursive:true});
+const defaults=(userId:string):ManagerSettings=>({userId,language:'Kiswahili',notifications:true,quietHours:{enabled:false,start:'22:00',end:'07:00'},proactiveAssistant:true,defaultTaskPriority:'medium',voiceActions:true,androidActions:true});
+function load():Store { try { if(fs.existsSync(FILE)) return JSON.parse(fs.readFileSync(FILE,'utf8')); } catch(e){ console.error('[MKUU-MANAGER] load failed',e); } return {tasks:[],events:[],reminders:[],settings:{},actions:[]}; }
+let store=load();
+function save(){fs.writeFileSync(FILE,JSON.stringify(store,null,2),'utf8');}
+const id=(prefix:string)=>`${prefix}_${Date.now()}_${Math.random().toString(36).slice(2,8)}`;
+export function getManagerSnapshot(userId:string){ const settings=store.settings[userId]||defaults(userId); store.settings[userId]=settings; save(); const now=Date.now(); const dueReminders=store.reminders.filter(r=>r.userId===userId&&r.enabled&&new Date(r.remindAt).getTime()<=now&&!r.deliveredAt); const openTasks=store.tasks.filter(t=>t.userId===userId&&t.status!=='done'&&t.status!=='cancelled'); const upcoming=store.events.filter(e=>e.userId===userId&&new Date(e.startsAt).getTime()>=now).sort((a,b)=>+new Date(a.startsAt)-+new Date(b.startsAt)); return {tasks:store.tasks.filter(t=>t.userId===userId),events:upcoming,reminders:store.reminders.filter(r=>r.userId===userId),settings,dueReminders,stats:{openTasks:openTasks.length,completedTasks:store.tasks.filter(t=>t.userId===userId&&t.status==='done').length,upcomingEvents:upcoming.length,dueReminders:dueReminders.length,peopleReady:true}}; }
+export function addTask(userId:string,input:Partial<ManagerTask>){if(!input.title?.trim()) throw new Error('Jina la kazi linahitajika');const now=new Date().toISOString();const task:ManagerTask={id:id('task'),userId,title:input.title.trim(),notes:input.notes,dueAt:input.dueAt,priority:input.priority||'medium',status:'pending',createdAt:now,updatedAt:now};store.tasks.unshift(task);save();return task;}
+export function updateTask(userId:string,taskId:string,input:Partial<ManagerTask>){const i=store.tasks.findIndex(t=>t.id===taskId&&t.userId===userId);if(i<0)return null;store.tasks[i]={...store.tasks[i],...input,id:taskId,userId,updatedAt:new Date().toISOString()};save();return store.tasks[i];}
+export function deleteTask(userId:string,taskId:string){const n=store.tasks.length;store.tasks=store.tasks.filter(t=>!(t.id===taskId&&t.userId===userId));save();return n!==store.tasks.length;}
+export function addEvent(userId:string,input:Partial<ManagerEvent>){if(!input.title?.trim()||!input.startsAt)throw new Error('Jina na muda wa tukio vinahitajika');const now=new Date().toISOString();const event:ManagerEvent={id:id('event'),userId,title:input.title.trim(),notes:input.notes,startsAt:input.startsAt,endsAt:input.endsAt,location:input.location,createdAt:now,updatedAt:now};store.events.push(event);store.events.sort((a,b)=>+new Date(a.startsAt)-+new Date(b.startsAt));save();return event;}
+export function updateEvent(userId:string,eventId:string,input:Partial<ManagerEvent>){const i=store.events.findIndex(e=>e.id===eventId&&e.userId===userId);if(i<0)return null;store.events[i]={...store.events[i],...input,id:eventId,userId,updatedAt:new Date().toISOString()};save();return store.events[i];}
+export function deleteEvent(userId:string,eventId:string){const n=store.events.length;store.events=store.events.filter(e=>!(e.id===eventId&&e.userId===userId));save();return n!==store.events.length;}
+export function addReminder(userId:string,input:Partial<ManagerReminder>){if(!input.title?.trim()||!input.remindAt)throw new Error('Jina na muda wa ukumbusho vinahitajika');const r:ManagerReminder={id:id('rem'),userId,title:input.title.trim(),remindAt:input.remindAt,repeat:input.repeat||'none',enabled:input.enabled!==false,createdAt:new Date().toISOString()};store.reminders.unshift(r);save();return r;}
+export function updateReminder(userId:string,reminderId:string,input:Partial<ManagerReminder>){const i=store.reminders.findIndex(r=>r.id===reminderId&&r.userId===userId);if(i<0)return null;store.reminders[i]={...store.reminders[i],...input,id:reminderId,userId};save();return store.reminders[i];}
+export function deleteReminder(userId:string,reminderId:string){const n=store.reminders.length;store.reminders=store.reminders.filter(r=>!(r.id===reminderId&&r.userId===userId));save();return n!==store.reminders.length;}
+export function updateSettings(userId:string,input:Partial<ManagerSettings>){store.settings[userId]={...(store.settings[userId]||defaults(userId)),...input,userId,quietHours:{...(store.settings[userId]||defaults(userId)).quietHours,...(input.quietHours||{})}};save();return store.settings[userId];}
+export function addAction(userId:string,input:Pick<ManagerAction,'type'|'label'|'payload'>){const action:ManagerAction={id:id('action'),userId,...input,createdAt:new Date().toISOString()};store.actions.unshift(action);save();return action;}
+export function markReminderDelivered(userId:string,idValue:string){const i=store.reminders.findIndex(r=>r.id===idValue&&r.userId===userId);if(i<0)return null;const r=store.reminders[i];r.deliveredAt=new Date().toISOString();if(r.repeat!=='none'){const d=new Date(r.remindAt);if(r.repeat==='daily')d.setDate(d.getDate()+1);if(r.repeat==='weekly')d.setDate(d.getDate()+7);if(r.repeat==='monthly')d.setMonth(d.getMonth()+1);r.remindAt=d.toISOString();r.deliveredAt=undefined;}save();return r;}
