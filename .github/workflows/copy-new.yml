@@ -1,0 +1,31 @@
+name: Copy New to Mbozah
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+
+jobs:
+  copy:
+    if: !startsWith(github.event.head_commit.message, 'Copy New to Mbozah')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Mbozah
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Copy all files from New
+        run: |
+          git clone --depth 1 https://github.com/maxmkuu-eng/New.git /tmp/new-source
+          rm -rf /tmp/new-source/.git
+          cp -a /tmp/new-source/. .
+          rm -rf /tmp/new-source
+      - name: Commit and push copy
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "Copy New to Mbozah" || exit 0
+          git push origin HEAD:main
