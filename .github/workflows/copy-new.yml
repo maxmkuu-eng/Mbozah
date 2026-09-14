@@ -16,21 +16,18 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - name: Download every file from New
+      - name: Copy complete New repository
         shell: bash
         run: |
           set -euo pipefail
-          rm -rf new-source
-          mkdir -p new-source
-          curl -fsSL 'https://api.github.com/repos/maxmkuu-eng/New/git/trees/main?recursive=1' -o /tmp/new-tree.json
-          jq -r '.tree[] | select(.type == "blob") | .path' /tmp/new-tree.json > /tmp/new-files.txt
-          while IFS= read -r path; do
-            mkdir -p "new-source/$(dirname "$path")"
-            curl -fsSL "https://raw.githubusercontent.com/maxmkuu-eng/New/main/${path}" -o "new-source/${path}"
-          done < /tmp/new-files.txt
-          rm -rf .github/workflows/copy-new.yml
-          cp -a new-source/. .
-          rm -rf new-source
+          rm -rf /tmp/new-source /tmp/new.tar.gz
+          curl -fsSL 'https://github.com/maxmkuu-eng/New/archive/refs/heads/main.tar.gz' -o /tmp/new.tar.gz
+          mkdir -p /tmp/new-source
+          tar -xzf /tmp/new.tar.gz -C /tmp/new-source --strip-components=1
+          rm -rf /tmp/new-source/.git
+          rm -f .github/workflows/copy-new.yml
+          cp -a /tmp/new-source/. .
+          rm -rf /tmp/new-source /tmp/new.tar.gz
       - name: Commit and push copy
         run: |
           git config user.name "github-actions[bot]"
