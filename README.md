@@ -1,3 +1,3 @@
 # Mbozah
 
-Copying all files from New.
+Copying complete repository from New.
