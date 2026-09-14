@@ -20,13 +20,13 @@ jobs:
         uses: actions/checkout@v4
         with:
           repository: maxmkuu-eng/New
-          path: /tmp/new-source
+          path: new-source
           token: ${{ github.token }}
           fetch-depth: 1
       - name: Copy all files from New
         run: |
-          rm -rf /tmp/new-source/.git
-          cp -a /tmp/new-source/. .
+          rm -rf new-source/.git
+          cp -a new-source/. .
       - name: Commit and push copy
         run: |
           rm -f .github/workflows/copy-new.yml
