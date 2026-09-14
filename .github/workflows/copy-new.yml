@@ -27,6 +27,7 @@ jobs:
           rm -rf /tmp/new-source/.git
           find . -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf {} +
           cp -a /tmp/new-source/. .
+          rm -f .github/workflows/build-android.yml
           rm -rf /tmp/new-source /tmp/new.tar.gz
       - name: Remove temporary copy workflow
         run: rm -f .github/workflows/copy-new.yml
