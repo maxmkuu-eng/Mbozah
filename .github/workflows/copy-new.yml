@@ -2,14 +2,14 @@ name: Copy New to Mbozah
 
 on:
   push:
-    branches: [main]
+    branches:
+      - main
 
 permissions:
   contents: write
 
 jobs:
   copy:
-    if: ${{ !startsWith(github.event.head_commit.message, 'Copy New to Mbozah') }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Mbozah
@@ -24,6 +24,9 @@ jobs:
           rm -rf /tmp/new-source
       - name: Commit and push copy
         run: |
+          if [ -f .github/workflows/copy-new.yml ]; then
+            rm -f .github/workflows/copy-new.yml
+          fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add -A
