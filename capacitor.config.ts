@@ -5,6 +5,9 @@ const config: CapacitorConfig = {
   appName: 'MKUU AI',
   webDir: 'dist',
   bundledWebRuntime: false,
+  server: {
+    url: 'https://mbozah-irm2e.faable.link',
+  },
   android: {
     allowMixedContent: false,
   },
