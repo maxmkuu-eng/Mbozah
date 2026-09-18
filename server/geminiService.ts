@@ -79,6 +79,7 @@ export interface ProcessChatParams {
   message: string;
   conversationHistory?: ChatMessage[];
   isVoice?: boolean;
+  user?: { id?: string; name?: string; email?: string; role?: string; } | null;
   attachments?: Array<{
     filename: string;
     fileType: string;
@@ -138,9 +139,11 @@ export class GeminiService {
 
   public async processChat(params: ProcessChatParams): Promise<ChatProcessResult> {
     const startTime = Date.now();
-    const { userId, message, conversationHistory = [], isVoice = false, attachments = [] } = params;
+    const { userId, message, conversationHistory = [], isVoice = false, attachments = [], user: firebaseUser } = params;
     console.log(`[MKUU-BACKEND] [CHAT_REQUEST_RECEIVED] user=${userId} msgLen=${message?.length || 0} attachCount=${attachments?.length || 0}`);
-    const user = db.getUser(userId) || db.getOwner();
+    const user = firebaseUser && firebaseUser.name
+      ? { ...firebaseUser, id: firebaseUser.id || userId, title: 'MKUU AI User', role: 'user', language: 'Kiswahili', theme: 'dark', securityPinSet: false, securityPin: '', createdAt: new Date().toISOString() }
+      : (db.getUser(userId) || db.getOwner());
     const newlySavedMemory = this.detectAndSaveMemory(userId, message);
     const newlySavedPerson = this.detectAndSavePerson(userId, message);
     const memories = db.getMemories(userId);
@@ -217,10 +220,12 @@ export class GeminiService {
   }
 
   public async *streamChat(params: ProcessChatParams): AsyncGenerator<{ type: 'delta'; text: string } | { type: 'done'; result: ChatProcessResult }, void, unknown> {
-    const { userId, message, conversationHistory = [], attachments = [] } = params;
+    const { userId, message, conversationHistory = [], attachments = [], user: firebaseUser } = params;
     const startTime = Date.now();
     console.log(`[MKUU-BACKEND] [CHAT_STREAM_STARTED] user=${userId} msgLen=${message?.length || 0}`);
-    const user = db.getUser(userId) || db.getOwner();
+    const user = firebaseUser && firebaseUser.name
+      ? { ...firebaseUser, id: firebaseUser.id || userId, title: 'MKUU AI User', role: 'user', language: 'Kiswahili', theme: 'dark', securityPinSet: false, securityPin: '', createdAt: new Date().toISOString() }
+      : (db.getUser(userId) || db.getOwner());
     const newlySavedMemory = this.detectAndSaveMemory(userId, message);
     const newlySavedPerson = this.detectAndSavePerson(userId, message);
     const memories = db.getMemories(userId);
