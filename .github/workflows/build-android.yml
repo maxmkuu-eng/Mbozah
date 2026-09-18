@@ -34,9 +34,15 @@ jobs:
       - name: Sync Capacitor Android
         run: npx cap sync android
 
+      - name: Prepare Gradle Wrapper
+        run: |
+          chmod 755 android/gradlew
+          test -x android/gradlew || (echo "Gradle wrapper is not executable" && exit 1)
+
       - name: Build release APK
-        working-directory: android
-        run: ./gradlew assembleRelease --no-daemon
+        run: |
+          chmod 755 android/gradlew
+          bash android/gradlew assembleRelease --no-daemon
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
