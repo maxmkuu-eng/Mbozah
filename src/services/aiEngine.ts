@@ -162,6 +162,7 @@ async function streamServerChat(params: ChatEngineParams, explicitBase?: string)
       people: params.people || [],
       attachments: params.attachments || [],
       isVoice: params.isVoice,
+      user: params.user || null,
     }),
   });
   if (!response.ok || !response.body) {
