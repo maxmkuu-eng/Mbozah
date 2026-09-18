@@ -24,7 +24,7 @@ import Sport from './components/Sport';
 import { RightSidebar } from './components/RightSidebar';
 import { FileGeneratorModal } from './components/FileGeneratorModal';
 import { DocumentPreviewModal } from './components/DocumentPreviewModal';
-import { localChatStorage } from './services/localChatStorage';
+import { localChatStorage, setLocalStorageUserContext } from './services/localChatStorage';
 import { apiFetch, getApiUrl, MkuuApiError } from './services/apiConfig';
 import { executeMkuuChat } from './services/aiEngine';
 import { clientGenerateFile } from './services/clientFileGenerator';
@@ -35,15 +35,15 @@ export const App: React.FC = () => {
   const [activeTab, setActiveTab] = useState<ActiveTab>('chat');
   const [user, setUser] = useState<UserProfile | null>({
     id: 'user_max_owner',
-    name: 'Max',
-    title: 'Mkuu',
-    email: 'maxmkuu@gmail.com',
-    role: 'owner',
+    name: 'MKUU AI User',
+    title: 'MKUU AI',
+    email: '',
+    role: 'user',
     language: 'Kiswahili',
     theme: 'dark',
     securityPinSet: true,
     securityPin: '1234',
-    createdAt: '2026-01-01T00:00:00.000Z',
+    createdAt: new Date().toISOString(),
   });
   const [conversations, setConversations] = useState<Conversation[]>([]);
   const [conversationId, setConversationId] = useState<string>('conv_main_max');
@@ -120,16 +120,54 @@ export const App: React.FC = () => {
   useEffect(() => {
     const unsubscribe = subscribeToFirebaseAuth((firebaseUser) => {
       if (firebaseUser) {
-        setUser((prev) => ({
-          ...(prev || {}),
+        const displayName =
+          firebaseUser.displayName?.trim() ||
+          firebaseUser.email?.split('@')[0] ||
+          'MKUU AI User';
+
+        // Every Firebase UID gets its own MKUU identity and local data context.
+        setLocalStorageUserContext(firebaseUser.uid);
+        setUser({
           id: firebaseUser.uid,
-          name: firebaseUser.displayName || firebaseUser.email?.split('@')[0] || 'MKUU AI User',
+          name: displayName,
           email: firebaseUser.email || '',
           title: 'MKUU AI User',
           role: 'user',
+          language: 'Kiswahili',
+          theme: 'dark',
           securityPinSet: false,
           securityPin: '',
+          createdAt: new Date().toISOString(),
+        });
+
+        // Never carry Max's identity, memories or conversations into another account.
+        setMemories([]);
+        setPeople([]);
+        setConversations([]);
+        setMessages([]);
+        setConversationId(`conv_${firebaseUser.uid}`);
+        setAutoReplySettings((prev) => ({
+          ...prev,
+          userId: firebaseUser.uid,
+          enabled: false,
+          emergencyStop: false,
+          whitelistedNumbers: [],
+          blacklistedNumbers: [],
         }));
+        localChatStorage.saveUserProfile({
+          id: firebaseUser.uid,
+          name: displayName,
+          email: firebaseUser.email || '',
+          title: 'MKUU AI User',
+          role: 'user',
+          language: 'Kiswahili',
+          theme: 'dark',
+          securityPinSet: false,
+          securityPin: '',
+          createdAt: new Date().toISOString(),
+        });
+      } else {
+        setLocalStorageUserContext('user_max_owner');
       }
     });
     return unsubscribe;
@@ -960,10 +998,11 @@ export const App: React.FC = () => {
   };
 
   const handleFirebaseSignedIn = (profile: { id: string; name: string; email: string; photoURL?: string | null }) => {
-    setUser((prev) => ({
-      ...(prev || {}),
+    const displayName = profile.name?.trim() || profile.email?.split('@')[0] || 'MKUU AI User';
+    setLocalStorageUserContext(profile.id);
+    setUser({
       id: profile.id,
-      name: profile.name,
+      name: displayName,
       email: profile.email,
       title: 'MKUU AI User',
       role: 'user',
@@ -972,7 +1011,24 @@ export const App: React.FC = () => {
       securityPinSet: false,
       securityPin: '',
       createdAt: new Date().toISOString(),
-    }));
+    });
+    setMemories([]);
+    setPeople([]);
+    setConversations([]);
+    setMessages([]);
+    setConversationId(`conv_${profile.id}`);
+    localChatStorage.saveUserProfile({
+      id: profile.id,
+      name: displayName,
+      email: profile.email,
+      title: 'MKUU AI User',
+      role: 'user',
+      language: 'Kiswahili',
+      theme: 'dark',
+      securityPinSet: false,
+      securityPin: '',
+      createdAt: new Date().toISOString(),
+    });
   };
 
   const handleClearAllData = async () => {
