@@ -40,6 +40,19 @@ jobs:
       - name: Sync Capacitor Android
         run: npx cap sync android
 
+      - name: Align CI APK package with registered Android client
+        shell: bash
+        run: |
+          FIREBASE_PACKAGE=$(python3 -c "import json; print(json.load(open('android/app/google-services.json'))['client'][0]['client_info']['android_client_info']['package_name'])")
+          python3 - "$FIREBASE_PACKAGE" <<'PY'
+          import pathlib, re, sys
+          p=pathlib.Path('android/app/build.gradle')
+          s=p.read_text()
+          package=sys.argv[1]
+          s=re.sub(r'applicationId\s+"[^"]+"', f'applicationId "{package}"', s, count=1)
+          p.write_text(s)
+          PY
+
       - name: Build release APK
         run: gradle -p android assembleRelease --no-daemon
 
