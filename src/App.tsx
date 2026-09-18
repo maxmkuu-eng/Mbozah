@@ -959,6 +959,22 @@ export const App: React.FC = () => {
     URL.revokeObjectURL(url);
   };
 
+  const handleFirebaseSignedIn = (profile: { id: string; name: string; email: string; photoURL?: string | null }) => {
+    setUser((prev) => ({
+      ...(prev || {}),
+      id: profile.id,
+      name: profile.name,
+      email: profile.email,
+      title: 'MKUU AI User',
+      role: 'user',
+      language: 'Kiswahili',
+      theme: 'dark',
+      securityPinSet: false,
+      securityPin: '',
+      createdAt: new Date().toISOString(),
+    }));
+  };
+
   const handleClearAllData = async () => {
     await localChatStorage.clearAllConversations();
     setMessages([]);
@@ -1143,21 +1159,7 @@ export const App: React.FC = () => {
       <GoogleAuthModal
         isOpen={isNewUserAuthOpen}
         onClose={() => setIsNewUserAuthOpen(false)}
-        onSignedIn={(profile) => {
-          setUser((prev) => ({
-            ...(prev || {}),
-            id: profile.id,
-            name: profile.name,
-            email: profile.email,
-            title: 'MKUU AI User',
-            role: 'user',
-            language: 'Kiswahili',
-            theme: 'dark',
-            securityPinSet: false,
-            securityPin: '',
-            createdAt: new Date().toISOString(),
-          }));
-        }}
+        onSignedIn={handleFirebaseSignedIn}
       />
 
       {/* Voice Assistant Modal */
