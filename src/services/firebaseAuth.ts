@@ -5,10 +5,13 @@ import {
   signInWithPopup,
   signInWithRedirect,
   getRedirectResult,
+  signInWithCredential,
   signOut,
   onAuthStateChanged,
   type User as FirebaseUser,
 } from 'firebase/auth';
+import { Capacitor } from '@capacitor/core';
+import { FirebaseAuthentication } from '@capacitor-firebase/authentication';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyBVYPOIPhEB7xgi7tdGyFFmc4ByTOL8rkE',
@@ -29,6 +32,24 @@ const googleProvider = new GoogleAuthProvider();
 googleProvider.setCustomParameters({ prompt: 'select_account' });
 
 export const signInWithGoogle = async () => {
+  if (Capacitor.isNativePlatform()) {
+    const result = await FirebaseAuthentication.signInWithGoogle({
+      skipNativeAuth: true,
+      useCredentialManager: true,
+    });
+
+    if (!result.user || !result.credential?.idToken) {
+      throw new Error('Google sign-in haikukamilika ndani ya MKUU AI.');
+    }
+
+    const credential = GoogleAuthProvider.credential(
+      result.credential.idToken,
+      result.credential.accessToken,
+    );
+
+    return signInWithCredential(firebaseAuth, credential);
+  }
+
   try {
     return await signInWithPopup(firebaseAuth, googleProvider);
   } catch (error: any) {
@@ -44,7 +65,17 @@ export const signInWithGoogle = async () => {
   }
 };
 
-export const signOutGoogle = () => signOut(firebaseAuth);
+export const signOutGoogle = async () => {
+  if (Capacitor.isNativePlatform()) {
+    try {
+      await FirebaseAuthentication.signOut();
+    } finally {
+      await signOut(firebaseAuth);
+    }
+    return;
+  }
+  await signOut(firebaseAuth);
+};
 
 export const subscribeToFirebaseAuth = (callback: (user: FirebaseUser | null) => void) =>
   onAuthStateChanged(firebaseAuth, callback);
