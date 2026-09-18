@@ -54,7 +54,7 @@ async function startServer() {
   app.post('/api/manager/actions',(req,res)=>{try{const {type,label,payload={}}=req.body||{};if(!type||!label)return res.status(400).json({error:'Action type na label vinahitajika'});res.status(201).json(addAction(DEFAULT_USER_ID,{type,label,payload}));}catch(e:any){res.status(400).json({error:e.message});}});
 
   const processChatRequest = async (req:any) => {
-    const {message='',conversationId,conversationHistory=[],isVoice=false,attachments=[],people=[]}=req.body||{};
+    const {message='',conversationId,conversationHistory=[],isVoice=false,attachments=[],people=[],user}=req.body||{};
     if(!message && (!attachments||attachments.length===0)) throw new Error('Ujumbe au kiambatisho kinahitajika');
     if (Array.isArray(people) && people.length > 0) {
       const existing = db.getPeople(DEFAULT_USER_ID);
@@ -75,7 +75,7 @@ async function startServer() {
     }
     let effectiveHistory=Array.isArray(conversationHistory)&&conversationHistory.length?conversationHistory:[];
     if(!effectiveHistory.length&&conversationId){const stored=db.getConversation(conversationId,DEFAULT_USER_ID);if(stored) effectiveHistory=stored.messages;}
-    const result=await geminiService.processChat({userId:DEFAULT_USER_ID,message,conversationHistory:effectiveHistory,isVoice,attachments});
+    const result=await geminiService.processChat({userId:DEFAULT_USER_ID,message,conversationHistory:effectiveHistory,isVoice,attachments,user});
     if(conversationId){let c=db.getConversation(conversationId,DEFAULT_USER_ID);const u={id:`msg_${Date.now()}_u`,role:'user' as const,content:message,timestamp:new Date().toISOString(),isVoice,attachments};const a={id:`msg_${Date.now()}_a`,role:'assistant' as const,content:result.reply,timestamp:new Date().toISOString(),generatedFiles:result.generatedFiles,memoryExtracted:result.memoriesExtracted?.map(m=>m.content),personRecognized:result.peopleRecognized?.map(p=>p.name)};if(c){c.messages.push(u,a);db.saveConversation(c);}else{c={id:conversationId,userId:DEFAULT_USER_ID,title:message.slice(0,35)||'Mazungumzo Mapya',createdAt:new Date().toISOString(),updatedAt:new Date().toISOString(),messages:[u,a]};db.saveConversation(c);}}
     return {reply:result.reply,cleanSpeechText:result.cleanSpeechText,memoriesExtracted:result.memoriesExtracted,peopleRecognized:result.peopleRecognized,generatedFiles:result.generatedFiles,aiProvider:result.aiProvider,chatModel:result.chatModel,latencyMs:result.latencyMs};
   };
@@ -121,6 +121,7 @@ async function startServer() {
         conversationHistory: effectiveHistory,
         isVoice,
         attachments,
+        user,
       })) {
         if (packet.type === 'delta') {
           fullReply += packet.text;
