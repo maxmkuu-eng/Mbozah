@@ -23,6 +23,8 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 export const firebaseAuth = getAuth(app);
 
+export const getCurrentFirebaseUser = () => firebaseAuth.currentUser;
+
 const googleProvider = new GoogleAuthProvider();
 googleProvider.setCustomParameters({ prompt: 'select_account' });
 
