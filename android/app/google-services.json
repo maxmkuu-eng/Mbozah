@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "850880444376",
+    "project_id": "com-mkuu-ai",
+    "storage_bucket": "com-mkuu-ai.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:850880444376:android:c638e28dc77931b63624ad",
+        "android_client_info": {
+          "package_name": "Com.mkuu.ai"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDW1COIox3js6triFUpVXmYIAuNaUT61bA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
