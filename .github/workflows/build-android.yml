@@ -25,6 +25,11 @@ jobs:
           distribution: temurin
           java-version: '17'
 
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: '8.13'
+
       - name: Install dependencies
         run: npm install --no-audit --no-fund
 
@@ -34,15 +39,8 @@ jobs:
       - name: Sync Capacitor Android
         run: npx cap sync android
 
-      - name: Prepare Gradle Wrapper
-        run: |
-          chmod 755 android/gradlew
-          test -x android/gradlew || (echo "Gradle wrapper is not executable" && exit 1)
-
       - name: Build release APK
-        run: |
-          chmod 755 android/gradlew
-          bash android/gradlew assembleRelease --no-daemon
+        run: gradle -p android assembleRelease --no-daemon
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
