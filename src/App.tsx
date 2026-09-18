@@ -1162,7 +1162,7 @@ export const App: React.FC = () => {
         onSignedIn={handleFirebaseSignedIn}
       />
 
-      {/* Voice Assistant Modal */
+      {/* Voice Assistant Modal */}
       <VoiceModal
         isOpen={isVoiceModalOpen}
         onClose={() => setIsVoiceModalOpen(false)}
