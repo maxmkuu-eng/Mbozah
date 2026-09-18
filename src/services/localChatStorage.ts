@@ -39,6 +39,12 @@ const LS_KEYS = {
 };
 
 // Default Initial Data (Seed data so APK never starts empty)
+let currentUserId = 'user_max_owner';
+
+export const setLocalStorageUserContext = (userId: string) => {
+  currentUserId = userId || 'user_max_owner';
+};
+
 const DEFAULT_USER: UserProfile = {
   id: 'user_max_owner',
   name: 'Max',
@@ -178,17 +184,15 @@ export const localChatStorage = {
       console.warn('IndexedDB unavailable, falling back to LocalStorage:', e);
     }
 
-    // Seed User Profile
-    if (!localStorage.getItem(LS_KEYS.USER)) {
+    // Seed owner defaults only for the original owner account.
+    if (currentUserId === 'user_max_owner' && !localStorage.getItem(LS_KEYS.USER)) {
       saveToLocalStorage(LS_KEYS.USER, DEFAULT_USER);
     }
 
-    // 1. Seed Memories
+    // 1. Seed owner memories only for the original owner account.
     const existingMems = await this.getMemories();
-    if (!existingMems || existingMems.length === 0) {
-      for (const m of DEFAULT_MEMORIES) {
-        await this.saveMemory(m);
-      }
+    if (currentUserId === 'user_max_owner' && (!existingMems || existingMems.length === 0)) {
+      for (const m of DEFAULT_MEMORIES) await this.saveMemory(m);
     }
 
     // 2. Seed People - do not seed any sample people
@@ -248,17 +252,17 @@ export const localChatStorage = {
       // ignore
     }
 
-    // 4. Seed AutoReply Settings
-    if (!localStorage.getItem(LS_KEYS.SETTINGS)) {
+    // 4. Seed AutoReply Settings only for the original owner account.
+    if (currentUserId === 'user_max_owner' && !localStorage.getItem(LS_KEYS.SETTINGS)) {
       saveToLocalStorage(LS_KEYS.SETTINGS, DEFAULT_SETTINGS);
     }
 
-    // Seed default conversation if none exists
+    // Seed the owner welcome conversation only for the original owner account.
     const convs = await this.getAllConversations();
-    if (convs.length === 0) {
+    if (currentUserId === 'user_max_owner' && convs.length === 0) {
       const initialConv: Conversation = {
         id: 'conv_main_max',
-        userId: 'user_max_owner',
+        userId: currentUserId,
         title: 'Mazungumzo ya Awali',
         createdAt: new Date().toISOString(),
         updatedAt: new Date().toISOString(),
@@ -290,8 +294,8 @@ export const localChatStorage = {
         const req = store.getAll();
 
         req.onsuccess = () => {
-          const list: Conversation[] = req.result || [];
-          const localList = getFromLocalStorage<Conversation[]>(LS_KEYS.CONVERSATIONS, []);
+          const list: Conversation[] = (req.result || []).filter((c: Conversation) => c.userId === currentUserId);
+          const localList = getFromLocalStorage<Conversation[]>(LS_KEYS.CONVERSATIONS, []).filter((c) => c.userId === currentUserId);
 
           const map = new Map<string, Conversation>();
           for (const item of list) map.set(item.id, item);
@@ -441,8 +445,8 @@ export const localChatStorage = {
         const req = store.getAll();
 
         req.onsuccess = () => {
-          const list: Memory[] = req.result || [];
-          const localList = getFromLocalStorage<Memory[]>(LS_KEYS.MEMORIES, DEFAULT_MEMORIES);
+          const list: Memory[] = (req.result || []).filter((m: Memory) => m.userId === currentUserId);
+          const localList = getFromLocalStorage<Memory[]>(LS_KEYS.MEMORIES, DEFAULT_MEMORIES).filter((m) => m.userId === currentUserId);
 
           const map = new Map<string, Memory>();
           for (const item of list) map.set(item.id, item);
@@ -460,7 +464,7 @@ export const localChatStorage = {
         };
       });
     } catch {
-      return getFromLocalStorage<Memory[]>(LS_KEYS.MEMORIES, DEFAULT_MEMORIES);
+      return getFromLocalStorage<Memory[]>(LS_KEYS.MEMORIES, DEFAULT_MEMORIES).filter((m) => m.userId === currentUserId);
     }
   },
 
@@ -531,8 +535,8 @@ export const localChatStorage = {
         const req = store.getAll();
 
         req.onsuccess = () => {
-          const list: Person[] = req.result || [];
-          const localList = getFromLocalStorage<Person[]>(LS_KEYS.PEOPLE, []);
+          const list: Person[] = (req.result || []).filter((p: Person) => p.userId === currentUserId);
+          const localList = getFromLocalStorage<Person[]>(LS_KEYS.PEOPLE, []).filter((p) => p.userId === currentUserId);
 
           const map = new Map<string, Person>();
           for (const item of list) map.set(item.id, item);
@@ -551,7 +555,7 @@ export const localChatStorage = {
         };
       });
     } catch {
-      return getFromLocalStorage<Person[]>(LS_KEYS.PEOPLE, []).filter((p) => !isSamplePerson(p.name, p.phone));
+      return getFromLocalStorage<Person[]>(LS_KEYS.PEOPLE, []).filter((p) => p.userId === currentUserId && !isSamplePerson(p.name, p.phone));
     }
   },
 
