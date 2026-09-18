@@ -45,6 +45,7 @@ interface NavigationProps {
   onSelectConversation?: (id: string) => void;
   onNewChat?: () => void;
   onDeleteConversation?: (id: string) => void;
+  onNewUser?: () => void;
 }
 
 export const Navigation: React.FC<NavigationProps> = ({
@@ -66,6 +67,7 @@ export const Navigation: React.FC<NavigationProps> = ({
   onSelectConversation,
   onNewChat,
   onDeleteConversation,
+  onNewUser,
 }) => {
   const [searchQuery, setSearchQuery] = useState('');
   const [isLibraryOpen, setIsLibraryOpen] = useState(true);
@@ -150,6 +152,18 @@ export const Navigation: React.FC<NavigationProps> = ({
               <span>Rudi Kwenye Mazungumzo (Chat)</span>
             </button>
           )}
+
+          <button
+            id="nav-new-user-btn"
+            onClick={() => {
+              onNewUser?.();
+              setMobileMenuOpen(false);
+            }}
+            className="w-full py-2.5 px-3.5 rounded-xl bg-[#14151a] hover:bg-[#1d1f27] text-[#f0f4f9] font-semibold text-xs flex items-center justify-center space-x-2 transition cursor-pointer border border-[#D4AF37]/40"
+          >
+            <Users className="w-4 h-4 text-[#D4AF37]" />
+            <span>NEW USER • CONTINUE WITH GOOGLE</span>
+          </button>
 
           {/* New Chat Primary Action */}
           <button
