@@ -3,6 +3,8 @@ import {
   getAuth,
   GoogleAuthProvider,
   signInWithPopup,
+  signInWithRedirect,
+  getRedirectResult,
   signOut,
   onAuthStateChanged,
   type User as FirebaseUser,
@@ -24,7 +26,23 @@ export const firebaseAuth = getAuth(app);
 const googleProvider = new GoogleAuthProvider();
 googleProvider.setCustomParameters({ prompt: 'select_account' });
 
-export const signInWithGoogle = () => signInWithPopup(firebaseAuth, googleProvider);
+export const signInWithGoogle = async () => {
+  try {
+    return await signInWithPopup(firebaseAuth, googleProvider);
+  } catch (error: any) {
+    if (
+      error?.code === 'auth/popup-blocked' ||
+      error?.code === 'auth/popup-closed-by-user' ||
+      error?.code === 'auth/cancelled-popup-request'
+    ) {
+      await signInWithRedirect(firebaseAuth, googleProvider);
+      return getRedirectResult(firebaseAuth);
+    }
+    throw error;
+  }
+};
+
 export const signOutGoogle = () => signOut(firebaseAuth);
+
 export const subscribeToFirebaseAuth = (callback: (user: FirebaseUser | null) => void) =>
   onAuthStateChanged(firebaseAuth, callback);
