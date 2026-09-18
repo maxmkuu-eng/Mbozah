@@ -29,7 +29,7 @@ import { apiFetch, getApiUrl, MkuuApiError } from './services/apiConfig';
 import { executeMkuuChat } from './services/aiEngine';
 import { clientGenerateFile } from './services/clientFileGenerator';
 import GoogleAuthModal from './components/GoogleAuthModal';
-import { subscribeToFirebaseAuth } from './services/firebaseAuth';
+import { firebaseAuth, subscribeToFirebaseAuth } from './services/firebaseAuth';
 
 export const App: React.FC = () => {
   const [activeTab, setActiveTab] = useState<ActiveTab>('chat');
@@ -260,7 +260,7 @@ export const App: React.FC = () => {
     try {
       // User Profile
       const userData = await fetchJson<any>('/api/me');
-      if (userData) {
+      if (userData && !firebaseAuth.currentUser) {
         setUser(userData.user || userData);
       }
 
