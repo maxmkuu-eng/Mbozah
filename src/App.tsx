@@ -28,6 +28,8 @@ import { localChatStorage } from './services/localChatStorage';
 import { apiFetch, getApiUrl, MkuuApiError } from './services/apiConfig';
 import { executeMkuuChat } from './services/aiEngine';
 import { clientGenerateFile } from './services/clientFileGenerator';
+import GoogleAuthModal from './components/GoogleAuthModal';
+import { subscribeToFirebaseAuth } from './services/firebaseAuth';
 
 export const App: React.FC = () => {
   const [activeTab, setActiveTab] = useState<ActiveTab>('chat');
@@ -113,6 +115,25 @@ export const App: React.FC = () => {
   const [isFileGeneratorModalOpen, setIsFileGeneratorModalOpen] = useState(false);
   const [previewingFile, setPreviewingFile] = useState<GeneratedFileSummary | null>(null);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [isNewUserAuthOpen, setIsNewUserAuthOpen] = useState(false);
+
+  useEffect(() => {
+    const unsubscribe = subscribeToFirebaseAuth((firebaseUser) => {
+      if (firebaseUser) {
+        setUser((prev) => ({
+          ...(prev || {}),
+          id: firebaseUser.uid,
+          name: firebaseUser.displayName || firebaseUser.email?.split('@')[0] || 'MKUU AI User',
+          email: firebaseUser.email || '',
+          title: 'MKUU AI User',
+          role: 'user',
+          securityPinSet: false,
+          securityPin: '',
+        }));
+      }
+    });
+    return unsubscribe;
+  }, []);
 
   // Monitor network online / offline and interface transitions (Wi-Fi ↔ Mobile Data)
   useEffect(() => {
@@ -967,6 +988,7 @@ export const App: React.FC = () => {
         mobileMenuOpen={mobileMenuOpen}
         setMobileMenuOpen={setMobileMenuOpen}
         isOnline={isOnline}
+        onNewUser={() => setIsNewUserAuthOpen(true)}
       />
 
       {/* Main View Area */}
@@ -1118,7 +1140,27 @@ export const App: React.FC = () => {
         />
       </div>
 
-      {/* Voice Assistant Modal */}
+      <GoogleAuthModal
+        isOpen={isNewUserAuthOpen}
+        onClose={() => setIsNewUserAuthOpen(false)}
+        onSignedIn={(profile) => {
+          setUser((prev) => ({
+            ...(prev || {}),
+            id: profile.id,
+            name: profile.name,
+            email: profile.email,
+            title: 'MKUU AI User',
+            role: 'user',
+            language: 'Kiswahili',
+            theme: 'dark',
+            securityPinSet: false,
+            securityPin: '',
+            createdAt: new Date().toISOString(),
+          }));
+        }}
+      />
+
+      {/* Voice Assistant Modal */
       <VoiceModal
         isOpen={isVoiceModalOpen}
         onClose={() => setIsVoiceModalOpen(false)}
